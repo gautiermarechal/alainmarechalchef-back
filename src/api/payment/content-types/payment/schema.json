@@ -12,17 +12,31 @@
   },
   "pluginOptions": {},
   "attributes": {
-    "Date": {
+    "date": {
       "type": "datetime"
+    },
+    "prix": {
+      "type": "decimal"
+    },
+    "stripeId": {
+      "type": "string"
     },
     "reservation": {
       "type": "relation",
-      "relation": "manyToOne",
+      "relation": "oneToOne",
       "target": "api::booking.booking",
-      "inversedBy": "paiements"
+      "mappedBy": "paiement"
     },
-    "Price": {
-      "type": "decimal"
+    "checkout_url": {
+      "type": "text"
+    },
+    "status": {
+      "type": "enumeration",
+      "enum": [
+        "pending",
+        "paid",
+        "refused"
+      ]
     }
   }
 }

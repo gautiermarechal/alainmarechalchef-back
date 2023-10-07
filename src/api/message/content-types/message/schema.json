@@ -12,16 +12,16 @@
   },
   "pluginOptions": {},
   "attributes": {
-    "Email": {
+    "email": {
       "type": "email"
     },
-    "Message": {
+    "message": {
       "type": "text"
     },
-    "Date": {
+    "date": {
       "type": "datetime"
     },
-    "Telephone": {
+    "telephone": {
       "type": "biginteger"
     }
   }

@@ -12,17 +12,17 @@
   },
   "pluginOptions": {},
   "attributes": {
-    "Nom": {
+    "nom": {
       "type": "string",
       "required": true
     },
-    "Description": {
+    "description": {
       "type": "text"
     },
-    "Date": {
+    "date": {
       "type": "datetime"
     },
-    "Image": {
+    "image": {
       "type": "media",
       "multiple": false,
       "required": false,
@@ -33,19 +33,21 @@
         "audios"
       ]
     },
-    "Code": {
-      "type": "uid",
-      "targetField": "Nom"
+    "code": {
+      "type": "uid"
     },
-    "Reservations": {
+    "capacity": {
+      "type": "integer",
+      "required": true
+    },
+    "reservations": {
       "type": "relation",
       "relation": "oneToMany",
       "target": "api::booking.booking",
-      "mappedBy": "Cours"
+      "mappedBy": "cours"
     },
-    "Capacity": {
-      "type": "integer",
-      "required": true
+    "prix": {
+      "type": "decimal"
     }
   }
 }

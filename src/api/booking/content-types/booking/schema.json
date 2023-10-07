@@ -12,38 +12,41 @@
   },
   "pluginOptions": {},
   "attributes": {
-    "Email_client": {
+    "email": {
       "type": "email"
     },
-    "Telephone_client": {
+    "telephone": {
       "type": "biginteger"
     },
-    "Date_de_reservation": {
+    "date": {
       "type": "datetime"
     },
-    "Cours": {
-      "type": "relation",
-      "relation": "manyToOne",
-      "target": "api::course.course",
-      "inversedBy": "Reservations"
-    },
-    "Status": {
+    "status": {
       "type": "enumeration",
       "enum": [
         "pending",
         "confirmed"
       ]
     },
-    "paiements": {
+    "paiement": {
       "type": "relation",
-      "relation": "oneToMany",
+      "relation": "oneToOne",
       "target": "api::payment.payment",
-      "mappedBy": "reservation"
+      "inversedBy": "reservation"
     },
-    "Prenom": {
+    "prenom": {
       "type": "string"
     },
-    "Nom": {
+    "nom": {
+      "type": "string"
+    },
+    "cours": {
+      "type": "relation",
+      "relation": "manyToOne",
+      "target": "api::course.course",
+      "inversedBy": "reservations"
+    },
+    "checkout_session_stripe": {
       "type": "string"
     }
   }
