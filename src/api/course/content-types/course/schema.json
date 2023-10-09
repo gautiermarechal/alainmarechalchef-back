@@ -38,7 +38,8 @@
     },
     "capacity": {
       "type": "integer",
-      "required": true
+      "required": true,
+      "min": 0
     },
     "reservations": {
       "type": "relation",

@@ -14,8 +14,7 @@ const stripe = new Stripe(process.env.STRAPI_ADMIN_TEST_STRIPE_SECRET_KEY, {
 module.exports = createCoreController("api::booking.booking", ({ strapi }) => ({
   async createStripeBookingPayment(ctx) {
     try {
-      const { courseId, email, telephone, date, prenom, nom } =
-        ctx.request.body;
+      const { courseId, email, telephone, prenom, nom } = ctx.request.body;
 
       if (!courseId) {
         return ctx.throw(400, "Please specify a course");
@@ -41,7 +40,7 @@ module.exports = createCoreController("api::booking.booking", ({ strapi }) => ({
         mode: "payment",
         // TODO: change this
         success_url: `${BASE_URL}/payment-success`,
-        cancel_url: BASE_URL,
+        cancel_url: `${BASE_URL}/payment-error`,
         line_items: [
           {
             price_data: {
@@ -74,7 +73,7 @@ module.exports = createCoreController("api::booking.booking", ({ strapi }) => ({
           cours: realCourse,
           paiement: null,
           status: "pending",
-          date,
+          date: new Date(),
           checkout_session_stripe: session.id,
           publishedAt: new Date(),
         },
@@ -88,7 +87,7 @@ module.exports = createCoreController("api::booking.booking", ({ strapi }) => ({
         data: {
           date: new Date(),
           prix: realCourse.prix,
-          stripeId: session.payment_link,
+          stripeId: session.id,
           checkout_url: session.url,
           status: "pending",
           reservation: newBooking,
