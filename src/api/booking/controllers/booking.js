@@ -32,7 +32,10 @@ module.exports = createCoreController("api::booking.booking", ({ strapi }) => ({
         return ctx.throw(402, "This course is not available anymore");
       }
 
-      const BASE_URL = ctx.request.header.origin || "http://localhost:1337";
+      const BASE_URL =
+        process.env.NODE_ENV === "development"
+          ? "http://localhost:1337"
+          : "https://alainmarechal.com";
 
       const session = await stripe.checkout.sessions.create({
         payment_method_types: ["card"],
@@ -101,7 +104,11 @@ module.exports = createCoreController("api::booking.booking", ({ strapi }) => ({
       return {
         status: 200,
         message: "Successfully created a new booking pending.",
-        data: { booking_created: newBooking, stripe_session_id: session.url },
+        data: {
+          booking_created: newBooking,
+          payment_created: newPayment,
+          stripe_session_url: session.url,
+        },
       };
     } catch (error) {
       return ctx.throw(500, error.message || "An error occured.");
