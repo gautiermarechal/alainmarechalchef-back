@@ -14,7 +14,7 @@
       "name": "Apache 2.0",
       "url": "https://www.apache.org/licenses/LICENSE-2.0.html"
     },
-    "x-generation-date": "2023-10-09T14:34:37.836Z"
+    "x-generation-date": "2023-10-16T07:25:45.757Z"
   },
   "x-strapi-config": {
     "path": "/documentation",
@@ -115,7 +115,7 @@
                   "confirmed"
                 ]
               },
-              "paiement": {
+              "payment": {
                 "oneOf": [
                   {
                     "type": "integer"
@@ -126,13 +126,13 @@
                 ],
                 "example": "string or id"
               },
-              "prenom": {
+              "firstname": {
                 "type": "string"
               },
-              "nom": {
+              "lastname": {
                 "type": "string"
               },
-              "cours": {
+              "course": {
                 "oneOf": [
                   {
                     "type": "integer"
@@ -219,7 +219,7 @@
               "confirmed"
             ]
           },
-          "paiement": {
+          "payment": {
             "type": "object",
             "properties": {
               "data": {
@@ -235,12 +235,23 @@
                         "type": "string",
                         "format": "date-time"
                       },
-                      "prix": {
+                      "price": {
                         "type": "number",
                         "format": "float"
                       },
-                      "stripeId": {
+                      "stripe_id": {
                         "type": "string"
+                      },
+                      "checkout_url": {
+                        "type": "string"
+                      },
+                      "status": {
+                        "type": "string",
+                        "enum": [
+                          "pending",
+                          "paid",
+                          "refused"
+                        ]
                       },
                       "reservation": {
                         "type": "object",
@@ -274,7 +285,7 @@
                                       "confirmed"
                                     ]
                                   },
-                                  "paiement": {
+                                  "payment": {
                                     "type": "object",
                                     "properties": {
                                       "data": {
@@ -291,13 +302,13 @@
                                       }
                                     }
                                   },
-                                  "prenom": {
+                                  "firstname": {
                                     "type": "string"
                                   },
-                                  "nom": {
+                                  "lastname": {
                                     "type": "string"
                                   },
-                                  "cours": {
+                                  "course": {
                                     "type": "object",
                                     "properties": {
                                       "data": {
@@ -309,7 +320,7 @@
                                           "attributes": {
                                             "type": "object",
                                             "properties": {
-                                              "nom": {
+                                              "name": {
                                                 "type": "string"
                                               },
                                               "description": {
@@ -947,6 +958,13 @@
                                               "capacity": {
                                                 "type": "integer"
                                               },
+                                              "price": {
+                                                "type": "number",
+                                                "format": "float"
+                                              },
+                                              "duration": {
+                                                "type": "integer"
+                                              },
                                               "reservations": {
                                                 "type": "object",
                                                 "properties": {
@@ -966,10 +984,6 @@
                                                     }
                                                   }
                                                 }
-                                              },
-                                              "prix": {
-                                                "type": "number",
-                                                "format": "float"
                                               },
                                               "createdAt": {
                                                 "type": "string",
@@ -1078,17 +1092,6 @@
                           }
                         }
                       },
-                      "checkout_url": {
-                        "type": "string"
-                      },
-                      "status": {
-                        "type": "string",
-                        "enum": [
-                          "pending",
-                          "paid",
-                          "refused"
-                        ]
-                      },
                       "createdAt": {
                         "type": "string",
                         "format": "date-time"
@@ -1141,13 +1144,13 @@
               }
             }
           },
-          "prenom": {
+          "firstname": {
             "type": "string"
           },
-          "nom": {
+          "lastname": {
             "type": "string"
           },
-          "cours": {
+          "course": {
             "type": "object",
             "properties": {
               "data": {
@@ -1245,12 +1248,12 @@
         "properties": {
           "data": {
             "required": [
-              "nom",
+              "name",
               "capacity"
             ],
             "type": "object",
             "properties": {
-              "nom": {
+              "name": {
                 "type": "string"
               },
               "description": {
@@ -1277,6 +1280,13 @@
               "capacity": {
                 "type": "integer"
               },
+              "price": {
+                "type": "number",
+                "format": "float"
+              },
+              "duration": {
+                "type": "integer"
+              },
               "reservations": {
                 "type": "array",
                 "items": {
@@ -1290,10 +1300,6 @@
                   ],
                   "example": "string or id"
                 }
-              },
-              "prix": {
-                "type": "number",
-                "format": "float"
               }
             }
           }
@@ -1348,11 +1354,11 @@
       "Course": {
         "type": "object",
         "required": [
-          "nom",
+          "name",
           "capacity"
         ],
         "properties": {
-          "nom": {
+          "name": {
             "type": "string"
           },
           "description": {
@@ -1990,6 +1996,13 @@
           "capacity": {
             "type": "integer"
           },
+          "price": {
+            "type": "number",
+            "format": "float"
+          },
+          "duration": {
+            "type": "integer"
+          },
           "reservations": {
             "type": "object",
             "properties": {
@@ -2024,7 +2037,7 @@
                             "confirmed"
                           ]
                         },
-                        "paiement": {
+                        "payment": {
                           "type": "object",
                           "properties": {
                             "data": {
@@ -2040,12 +2053,23 @@
                                       "type": "string",
                                       "format": "date-time"
                                     },
-                                    "prix": {
+                                    "price": {
                                       "type": "number",
                                       "format": "float"
                                     },
-                                    "stripeId": {
+                                    "stripe_id": {
                                       "type": "string"
+                                    },
+                                    "checkout_url": {
+                                      "type": "string"
+                                    },
+                                    "status": {
+                                      "type": "string",
+                                      "enum": [
+                                        "pending",
+                                        "paid",
+                                        "refused"
+                                      ]
                                     },
                                     "reservation": {
                                       "type": "object",
@@ -2063,17 +2087,6 @@
                                           }
                                         }
                                       }
-                                    },
-                                    "checkout_url": {
-                                      "type": "string"
-                                    },
-                                    "status": {
-                                      "type": "string",
-                                      "enum": [
-                                        "pending",
-                                        "paid",
-                                        "refused"
-                                      ]
                                     },
                                     "createdAt": {
                                       "type": "string",
@@ -2127,13 +2140,13 @@
                             }
                           }
                         },
-                        "prenom": {
+                        "firstname": {
                           "type": "string"
                         },
-                        "nom": {
+                        "lastname": {
                           "type": "string"
                         },
-                        "cours": {
+                        "course": {
                           "type": "object",
                           "properties": {
                             "data": {
@@ -2145,7 +2158,7 @@
                                 "attributes": {
                                   "type": "object",
                                   "properties": {
-                                    "nom": {
+                                    "name": {
                                       "type": "string"
                                     },
                                     "description": {
@@ -2300,6 +2313,13 @@
                                     "capacity": {
                                       "type": "integer"
                                     },
+                                    "price": {
+                                      "type": "number",
+                                      "format": "float"
+                                    },
+                                    "duration": {
+                                      "type": "integer"
+                                    },
                                     "reservations": {
                                       "type": "object",
                                       "properties": {
@@ -2319,10 +2339,6 @@
                                           }
                                         }
                                       }
-                                    },
-                                    "prix": {
-                                      "type": "number",
-                                      "format": "float"
                                     },
                                     "createdAt": {
                                       "type": "string",
@@ -2432,10 +2448,6 @@
               }
             }
           },
-          "prix": {
-            "type": "number",
-            "format": "float"
-          },
           "createdAt": {
             "type": "string",
             "format": "date-time"
@@ -2530,6 +2542,12 @@
                 "type": "string",
                 "pattern": "^\\d*$",
                 "example": "123456789"
+              },
+              "firstname": {
+                "type": "string"
+              },
+              "lastname": {
+                "type": "string"
               }
             }
           }
@@ -2599,6 +2617,12 @@
             "type": "string",
             "pattern": "^\\d*$",
             "example": "123456789"
+          },
+          "firstname": {
+            "type": "string"
+          },
+          "lastname": {
+            "type": "string"
           },
           "createdAt": {
             "type": "string",
@@ -2935,23 +2959,12 @@
                 "type": "string",
                 "format": "date-time"
               },
-              "prix": {
+              "price": {
                 "type": "number",
                 "format": "float"
               },
-              "stripeId": {
+              "stripe_id": {
                 "type": "string"
-              },
-              "reservation": {
-                "oneOf": [
-                  {
-                    "type": "integer"
-                  },
-                  {
-                    "type": "string"
-                  }
-                ],
-                "example": "string or id"
               },
               "checkout_url": {
                 "type": "string"
@@ -2963,6 +2976,17 @@
                   "paid",
                   "refused"
                 ]
+              },
+              "reservation": {
+                "oneOf": [
+                  {
+                    "type": "integer"
+                  },
+                  {
+                    "type": "string"
+                  }
+                ],
+                "example": "string or id"
               }
             }
           }
@@ -3021,12 +3045,23 @@
             "type": "string",
             "format": "date-time"
           },
-          "prix": {
+          "price": {
             "type": "number",
             "format": "float"
           },
-          "stripeId": {
+          "stripe_id": {
             "type": "string"
+          },
+          "checkout_url": {
+            "type": "string"
+          },
+          "status": {
+            "type": "string",
+            "enum": [
+              "pending",
+              "paid",
+              "refused"
+            ]
           },
           "reservation": {
             "type": "object",
@@ -3060,7 +3095,7 @@
                           "confirmed"
                         ]
                       },
-                      "paiement": {
+                      "payment": {
                         "type": "object",
                         "properties": {
                           "data": {
@@ -3076,12 +3111,23 @@
                                     "type": "string",
                                     "format": "date-time"
                                   },
-                                  "prix": {
+                                  "price": {
                                     "type": "number",
                                     "format": "float"
                                   },
-                                  "stripeId": {
+                                  "stripe_id": {
                                     "type": "string"
+                                  },
+                                  "checkout_url": {
+                                    "type": "string"
+                                  },
+                                  "status": {
+                                    "type": "string",
+                                    "enum": [
+                                      "pending",
+                                      "paid",
+                                      "refused"
+                                    ]
                                   },
                                   "reservation": {
                                     "type": "object",
@@ -3099,17 +3145,6 @@
                                         }
                                       }
                                     }
-                                  },
-                                  "checkout_url": {
-                                    "type": "string"
-                                  },
-                                  "status": {
-                                    "type": "string",
-                                    "enum": [
-                                      "pending",
-                                      "paid",
-                                      "refused"
-                                    ]
                                   },
                                   "createdAt": {
                                     "type": "string",
@@ -3415,13 +3450,13 @@
                           }
                         }
                       },
-                      "prenom": {
+                      "firstname": {
                         "type": "string"
                       },
-                      "nom": {
+                      "lastname": {
                         "type": "string"
                       },
-                      "cours": {
+                      "course": {
                         "type": "object",
                         "properties": {
                           "data": {
@@ -3433,7 +3468,7 @@
                               "attributes": {
                                 "type": "object",
                                 "properties": {
-                                  "nom": {
+                                  "name": {
                                     "type": "string"
                                   },
                                   "description": {
@@ -3819,6 +3854,13 @@
                                   "capacity": {
                                     "type": "integer"
                                   },
+                                  "price": {
+                                    "type": "number",
+                                    "format": "float"
+                                  },
+                                  "duration": {
+                                    "type": "integer"
+                                  },
                                   "reservations": {
                                     "type": "object",
                                     "properties": {
@@ -3838,10 +3880,6 @@
                                         }
                                       }
                                     }
-                                  },
-                                  "prix": {
-                                    "type": "number",
-                                    "format": "float"
                                   },
                                   "createdAt": {
                                     "type": "string",
@@ -3949,17 +3987,6 @@
                 }
               }
             }
-          },
-          "checkout_url": {
-            "type": "string"
-          },
-          "status": {
-            "type": "string",
-            "enum": [
-              "pending",
-              "paid",
-              "refused"
-            ]
           },
           "createdAt": {
             "type": "string",

@@ -15,17 +15,11 @@
     "date": {
       "type": "datetime"
     },
-    "prix": {
+    "price": {
       "type": "decimal"
     },
-    "stripeId": {
+    "stripe_id": {
       "type": "string"
-    },
-    "reservation": {
-      "type": "relation",
-      "relation": "oneToOne",
-      "target": "api::booking.booking",
-      "mappedBy": "paiement"
     },
     "checkout_url": {
       "type": "text"
@@ -37,6 +31,12 @@
         "paid",
         "refused"
       ]
+    },
+    "reservation": {
+      "type": "relation",
+      "relation": "oneToOne",
+      "target": "api::booking.booking",
+      "mappedBy": "payment"
     }
   }
 }

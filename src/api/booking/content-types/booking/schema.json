@@ -28,19 +28,19 @@
         "confirmed"
       ]
     },
-    "paiement": {
+    "payment": {
       "type": "relation",
       "relation": "oneToOne",
       "target": "api::payment.payment",
       "inversedBy": "reservation"
     },
-    "prenom": {
+    "firstname": {
       "type": "string"
     },
-    "nom": {
+    "lastname": {
       "type": "string"
     },
-    "cours": {
+    "course": {
       "type": "relation",
       "relation": "manyToOne",
       "target": "api::course.course",

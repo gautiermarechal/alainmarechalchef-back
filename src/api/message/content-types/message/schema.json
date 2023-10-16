@@ -23,6 +23,12 @@
     },
     "telephone": {
       "type": "biginteger"
+    },
+    "firstname": {
+      "type": "string"
+    },
+    "lastname": {
+      "type": "string"
     }
   }
 }
