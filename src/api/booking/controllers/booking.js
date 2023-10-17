@@ -14,7 +14,10 @@ const stripe = new Stripe(process.env.STRAPI_ADMIN_TEST_STRIPE_SECRET_KEY, {
 module.exports = createCoreController("api::booking.booking", ({ strapi }) => ({
   async createStripeBookingPayment(ctx) {
     try {
-      const { courseId, email, telephone, prenom, nom } = ctx.request.body;
+      const { courseId, email, telephone, firstname, lastname } =
+        ctx.request.body;
+
+      console.log(ctx.request.body);
 
       if (!courseId) {
         return ctx.throw(400, "Please specify a course");
@@ -48,9 +51,9 @@ module.exports = createCoreController("api::booking.booking", ({ strapi }) => ({
           {
             price_data: {
               currency: "eur",
-              unit_amount: realCourse.prix * 100,
+              unit_amount: realCourse.price * 100,
               product_data: {
-                name: realCourse.nom,
+                name: realCourse.name,
                 description: `Rendez vous le
                 ${new Date(realCourse.date).toLocaleString("fr-FR", {
                   timeZone: "UTC",
@@ -71,10 +74,10 @@ module.exports = createCoreController("api::booking.booking", ({ strapi }) => ({
         data: {
           email,
           telephone,
-          prenom,
-          nom,
-          cours: realCourse,
-          paiement: null,
+          firstname,
+          lastname,
+          course: realCourse,
+          payment: null,
           status: "pending",
           date: new Date(),
           checkout_session_stripe: session.id,
@@ -89,7 +92,7 @@ module.exports = createCoreController("api::booking.booking", ({ strapi }) => ({
       const newPayment = await strapi.service("api::payment.payment").create({
         data: {
           date: new Date(),
-          prix: realCourse.prix,
+          price: realCourse.price,
           stripeId: session.id,
           checkout_url: session.url,
           status: "pending",
