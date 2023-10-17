@@ -17,8 +17,6 @@ module.exports = createCoreController("api::booking.booking", ({ strapi }) => ({
       const { courseId, email, telephone, firstname, lastname } =
         ctx.request.body;
 
-      console.log(ctx.request.body);
-
       if (!courseId) {
         return ctx.throw(400, "Please specify a course");
       }
@@ -93,7 +91,7 @@ module.exports = createCoreController("api::booking.booking", ({ strapi }) => ({
         data: {
           date: new Date(),
           price: realCourse.price,
-          stripeId: session.id,
+          stripe_id: session.id,
           checkout_url: session.url,
           status: "pending",
           reservation: newBooking,
