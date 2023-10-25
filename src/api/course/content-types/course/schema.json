@@ -18,24 +18,16 @@
     },
     "description": {
       "type": "text",
-      "maxLength": 300
+      "maxLength": 300,
+      "required": true
     },
     "date": {
-      "type": "datetime"
-    },
-    "image": {
-      "type": "media",
-      "multiple": false,
-      "required": false,
-      "allowedTypes": [
-        "images",
-        "files",
-        "videos",
-        "audios"
-      ]
+      "type": "datetime",
+      "required": true
     },
     "code": {
-      "type": "uid"
+      "type": "uid",
+      "required": true
     },
     "capacity": {
       "type": "integer",
@@ -43,11 +35,13 @@
       "min": 0
     },
     "price": {
-      "type": "decimal"
+      "type": "decimal",
+      "required": true
     },
     "duration": {
       "type": "integer",
-      "min": 0
+      "min": 0,
+      "required": true
     },
     "reservations": {
       "type": "relation",
